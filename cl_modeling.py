@@ -1,3 +1,8 @@
+'''
+This class we can model
+'''
+
+
 class cl_modeling:
 
     def __init__(self, X_train, y_train, X_test, y_test):
@@ -35,7 +40,6 @@ class cl_modeling:
         else:
             ob2 = cl_modeling(self.X_train, self.X_test,
                               self.y_train, self.y_test)
-
             # Import model's lib
             from sklearn.ensemble import RandomForestClassifier
             from sklearn.linear_model import LogisticRegression
