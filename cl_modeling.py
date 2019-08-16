@@ -1,10 +1,9 @@
-'''
+"""
 This class we can model
-'''
+"""
 
 
 class cl_modeling:
-
     def __init__(self, X_train, y_train, X_test, y_test):
         self.X_train = X_train.copy()
         self.y_train = y_train.copy()
@@ -31,15 +30,13 @@ class cl_modeling:
 
     def multi_default_models(self, models=None):
         if models:
-            ob2 = cl_modeling(self.X_train, self.X_test,
-                              self.y_train, self.y_test)
+            ob2 = cl_modeling(self.X_train, self.X_test, self.y_train, self.y_test)
             for model in models:
                 print(model)
                 ob2.train_predict_model(model)
                 print()
         else:
-            ob2 = cl_modeling(self.X_train, self.X_test,
-                              self.y_train, self.y_test)
+            ob2 = cl_modeling(self.X_train, self.X_test, self.y_train, self.y_test)
             # Import model's lib
             from sklearn.ensemble import RandomForestClassifier
             from sklearn.linear_model import LogisticRegression
@@ -51,16 +48,22 @@ class cl_modeling:
             # Setting Models
             nb = GaussianNB()
             rf = RandomForestClassifier(
-                criterion="entropy", n_estimators=500, max_depth=6)
-            lr = LogisticRegression(solver='lbfgs', max_iter=1000)
-            dt = DecisionTreeClassifier(max_depth=13,  min_samples_leaf=10)
+                criterion="entropy", n_estimators=500, max_depth=6
+            )
+            lr = LogisticRegression(solver="lbfgs", max_iter=1000)
+            dt = DecisionTreeClassifier(max_depth=13, min_samples_leaf=10)
             xgb = XGBRFClassifier(max_depth=10, learning_rate=0.1)
             lgbm_rf = LGBMClassifier(
-                boosting_type='rf', n_jobs=1, bagging_freq=3,
-                bagging_fraction=.3, importance_type='gain')
+                boosting_type="rf",
+                n_jobs=1,
+                bagging_freq=3,
+                bagging_fraction=0.3,
+                importance_type="gain",
+            )
             lgbm_dart = LGBMClassifier(
-                boosting_type='dart', n_jobs=1, importance_type='gain')
-            lgbm = LGBMClassifier(n_jobs=1, importance_type='gain')
+                boosting_type="dart", n_jobs=1, importance_type="gain"
+            )
+            lgbm = LGBMClassifier(n_jobs=1, importance_type="gain")
 
             # Evaluating
             model_list = [nb, lr, dt, rf, xgb, lgbm_rf, lgbm_dart, lgbm]
@@ -68,5 +71,4 @@ class cl_modeling:
                 print(model)
                 ob2.train_predict_model(model)
                 print()
-            ob2 = cl_modeling(self.X_train, self.X_test,
-                              self.y_train, self.y_test)
+            ob2 = cl_modeling(self.X_train, self.X_test, self.y_train, self.y_test)
